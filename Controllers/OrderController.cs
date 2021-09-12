@@ -1,5 +1,6 @@
 ﻿using DeliveryAPI.Data;
 using DeliveryAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -45,10 +47,20 @@ namespace DeliveryAPI.Controllers
 
         // POST api/<OrderController> 
         [HttpPost]
-        public async Task<ActionResult<Order>> AddOrder(Order order)
+        public async Task<ActionResult<Order>> AddOrder([FromBody] Order order)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Ok(new
+                    {
+                        status = HttpStatusCode.BadRequest,
+                        Message = "model state order is invalid"
+                    });
+                }
+
+
                 _dbContext.Orders.Add(order);
                 await _dbContext.SaveChangesAsync();
 
@@ -71,9 +83,14 @@ namespace DeliveryAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrder(int id, Order order)
         {
-            if (id != order.Id)
+
+            if (!ModelState.IsValid)
             {
-                return Ok(HttpStatusCode.BadRequest);
+                return Ok(new
+                {
+                    status = HttpStatusCode.BadRequest,
+                    Message = "model state order is invalid"
+                });
             }
 
             _dbContext.Entry(order).State = EntityState.Modified;
