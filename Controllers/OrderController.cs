@@ -79,9 +79,9 @@ namespace DeliveryAPI.Controllers
 
         }
 
-        //// PUT api/<OrderController>/5
+        // PUT api/<OrderController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(int id, Order order)
+        public async Task<IActionResult> UpdateOrder(int id, [FromBody] UpdateOrder updateOrder)
         {
 
             if (!ModelState.IsValid)
@@ -93,7 +93,20 @@ namespace DeliveryAPI.Controllers
                 });
             }
 
-            _dbContext.Entry(order).State = EntityState.Modified;
+            var orderDb = await _dbContext.Orders.FindAsync(id);
+
+            if (orderDb == null)
+            {
+                return Ok(new { status = HttpStatusCode.NotFound, 
+                                Message = string.Format("order id {0} not found", id) });
+            }
+
+            orderDb.Description = updateOrder.Description;
+            orderDb.Address = updateOrder.Address;
+            orderDb.UpdateBy = updateOrder.UpdateBy;
+            orderDb.UpdatedOn = DateTime.Now;
+
+            _dbContext.Entry(orderDb).State = EntityState.Modified;
 
             try
             {
