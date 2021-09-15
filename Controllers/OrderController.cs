@@ -82,13 +82,23 @@ namespace DeliveryAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrder(int id, [FromBody] UpdateOrder updateOrder)
         {
+            var message = string.Empty;
 
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(updateOrder.Description) || string.IsNullOrWhiteSpace(updateOrder.Address){
+
+                message = "Please provide description or address to update";
+            }
+            else if (!ModelState.IsValid)
             {
+                message = "model state order is invalid";
+            }
+
+            if (!string.IsNullOrWhiteSpace(message)) {
+
                 return Ok(new
                 {
                     status = HttpStatusCode.BadRequest,
-                    Message = "model state order is invalid"
+                    Message = message
                 });
             }
 
@@ -100,8 +110,13 @@ namespace DeliveryAPI.Controllers
                                 Message = string.Format("order id {0} not found", id) });
             }
 
-            orderDb.Description = updateOrder.Description;
-            orderDb.Address = updateOrder.Address;
+            if (!string.IsNullOrWhiteSpace(updateOrder.Description))
+                orderDb.Description = updateOrder.Description;
+
+
+            if (!string.IsNullOrWhiteSpace(updateOrder.Address))
+                orderDb.Address = updateOrder.Address;
+
             orderDb.UpdateBy = updateOrder.UpdateBy;
             orderDb.UpdatedOn = DateTime.Now;
 
