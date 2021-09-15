@@ -10,7 +10,7 @@ namespace DeliveryAPI.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         [Column(TypeName = "int")]
         public int CustomerId { get; set; }
 

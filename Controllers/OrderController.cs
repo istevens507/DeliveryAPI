@@ -60,7 +60,6 @@ namespace DeliveryAPI.Controllers
                     });
                 }
 
-
                 _dbContext.Orders.Add(order);
                 await _dbContext.SaveChangesAsync();
 
