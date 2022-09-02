@@ -84,7 +84,7 @@ namespace DeliveryAPI.Controllers
         {
             var message = string.Empty;
 
-            if (string.IsNullOrWhiteSpace(updateOrder.Description) || string.IsNullOrWhiteSpace(updateOrder.Address){
+            if (string.IsNullOrWhiteSpace(updateOrder.Description) || string.IsNullOrWhiteSpace(updateOrder.Address)){
 
                 message = "Please provide description or address to update";
             }

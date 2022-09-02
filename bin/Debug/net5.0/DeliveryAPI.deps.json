@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "DeliveryAPI/1.0.0": {
         "dependencies": {
+          "Microsoft.CodeAnalysis.Analyzers": "3.3.3",
           "Microsoft.EntityFrameworkCore": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.0",
@@ -336,6 +337,7 @@
           }
         }
       },
+      "Microsoft.CodeAnalysis.Analyzers/3.3.3": {},
       "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Data.SqlClient/2.0.1": {
         "dependencies": {
@@ -770,7 +772,11 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
-      "System.Collections.Immutable/5.0.0": {},
+      "System.Collections.Immutable/5.0.0": {
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        }
+      },
       "System.Collections.NonGeneric/4.3.0": {
         "dependencies": {
           "System.Diagnostics.Debug": "4.3.0",
@@ -797,7 +803,11 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.ComponentModel.Annotations/5.0.0": {},
+      "System.ComponentModel.Annotations/5.0.0": {
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {}
+        }
+      },
       "System.ComponentModel.Primitives/4.3.0": {
         "dependencies": {
           "System.ComponentModel": "4.3.0",
@@ -843,7 +853,11 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.Diagnostics.DiagnosticSource/5.0.0": {},
+      "System.Diagnostics.DiagnosticSource/5.0.0": {
+        "compile": {
+          "lib/net5.0/System.Diagnostics.DiagnosticSource.dll": {}
+        }
+      },
       "System.Diagnostics.Tools/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -3068,6 +3082,13 @@
       "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.Analyzers/3.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j/rOZtLMVJjrfLRlAMckJLPW/1rze9MT1yfWqSIbUPGRu1m1P0fuo9PmqapwsmePfGB5PJrudQLvmUOAMF0DqQ==",
+      "path": "microsoft.codeanalysis.analyzers/3.3.3",
+      "hashPath": "microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512"
     },
     "Microsoft.CSharp/4.7.0": {
       "type": "package",
