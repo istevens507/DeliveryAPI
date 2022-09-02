@@ -64,7 +64,6 @@ namespace DeliveryAPI.Handlers
             {
                 return AuthenticateResult.Success(taskAuthTicket);
             }
-          
 
             return AuthenticateResult.Fail("Authentication failed");
         }
